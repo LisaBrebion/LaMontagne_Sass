@@ -1,0 +1,117 @@
+footer {
+    background: $grey2;
+    min-height: 640px;
+    width: 85%;
+    margin: 30px auto 70px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    // on place les éléments du formulaire les uns de dessous des autres à 900px
+    @media screen and (max-width:900px) {
+        grid-template-columns: 1fr;
+    }
+
+    // on paramètre l partie de gauche 
+    form {
+        // on applique display grid, tous les elements qui ne sont pas en block vont se mettre les uns en desous des autres et se répartir dans l'espace equitablement
+        display: grid;
+        gap: 18px;
+        padding: 60px 50px;
+        // on applique les tailles souhaitée pour chanque ligne :(1ere ligne de 18px (label) et les inputs de 45px, 200px pour le texte area et le reste pour le boutton-input)
+        grid-template-rows: 18px 45px 18px 45px 18px 200px 1fr;
+
+        // on aligne les lables en bas 
+        label {
+            display: flex;
+            align-items: flex-end;
+            font-size: 0.7rem;
+            @include title;
+            color: $grey3;
+        }
+
+        // on paramètre les inputs de type "text" (on ne souhaite pas agir sur le boutton de type submit et le textarea 
+        input[type="text"],
+        textarea {
+            background: none;
+            border: 1px solid $grey1;
+            border-radius: 4px;
+            // on enlève la possibilité d'agir sur la taille de notre textarea 
+            resize: none;
+        }
+
+        .submit-container {
+            display: flex;
+            // le bouton s'alignera tjs a la fin le + bas possibl dans la section
+            align-items: flex-end;
+        }
+
+        .btn {
+            color: $grey3;
+            border: 1px solid $grey3;
+        }
+    }
+
+    .infos-contact {
+        // on ajoute un trait de séparation leger entre les 2 sections du form 
+        border-left: 1px solid $grey1;
+        // on réparti les 4 éléments les uns en dessous des autres de manière équitable 
+        display: grid;
+        // on dit que les 4 enfants font tous 1 fraction / permet de fixer les tailles ( 4 lignes de 1fr)
+        grid-template-rows: repeat(4, 1fr);
+
+        // on cible le 1er élément pour ajouter un trait léger au dessus à 900px
+        div:nth-child(1) {
+            @media screen and (max-width:900px) {
+                border-top: 1px solid $grey1;
+                padding-bottom: 20px;
+            }
+        }
+
+        div {
+            border-bottom: 1px solid $grey1;
+            display: grid;
+            grid-template-columns: 30% 70%;
+            // on centre les élements verticalement  
+            align-items: center;
+
+            @media screen and (max-width:900px) {
+                grid-template-columns: 45% 55%;
+            }
+        }
+
+        h3 {
+            @include title;
+            font-size: 0.7rem;
+            // petite marge sur la gauche 
+            padding-left: 40px;
+            // on aligne les éléments sur la gauche 
+            text-align: left;
+            color: $grey3;
+        }
+
+        p {
+            font-size: 0.8rem;
+            line-height: 26px;
+            text-align: left;
+        }
+
+        .social {
+            ul {
+                display: flex;
+
+                li {
+                    border: 1px solid $grey1;
+                    border-radius: 150px;
+                    height: 40px;
+                    width: 40px;
+                    font-size: 0.9rem;
+                    margin-right: 12px;
+                    // on centre parfaitement les icones (i est l'enfant unique de li)
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

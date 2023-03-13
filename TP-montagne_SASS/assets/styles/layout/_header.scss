@@ -1,0 +1,134 @@
+header {
+    color: $white1;
+    position: relative;
+    min-height: 100vh;
+
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        opacity: 0;
+        transform: translateY(40px);
+        animation: headerAnim 1.5s forwards;
+
+        @keyframes headerAnim {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            @include title;
+            font-size: 4rem;
+            letter-spacing: 6px;
+
+            @media screen and (max-width:700px) {
+                font-size: 2rem;
+            }
+        }
+
+        p {
+            margin: 40px auto 60px;
+            font-style: italic;
+            width: 85%;
+        }
+
+        span {
+            border: 2px solid $white1;
+            height: 60px;
+            width: 60px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            // on centre l'élément "arrow" (enfant unique):
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.253);
+        color: $white1;
+        width: 85%;
+        height: 65px;
+        // on met un z-index car on veut que la nav soit bien devant 
+        z-index: 100;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        // on aligne verticalement les liens de la nav
+        ul {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-left {
+
+            // on paramètre le comportement de la nav pour lui dire quand on te survol,on applique ce comportment les li non survolés
+            &:hover li:not(:hover) {
+                background: none;
+                color: $white1;
+            }
+
+            li {
+                @include title;
+                font-size: 0.7rem;
+                // on paramètre les marges pour espacer les liens de la nav (0 en haut et en bas et 15px de chaque côtés)
+                padding: 0 15px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                @media screen and (max-width:700px) {
+                    font-size: 0.5rem;
+                }
+
+                // on paramètre le 1er lien de la nav (font blanc et text noir)
+                &:first-child {
+                    background: $white1;
+                    color: $black1;
+                }
+
+                // on paramètre le hover de la nav
+                &:hover {
+                    background: $white1;
+                    color: $black1;
+                }
+            }
+        }
+
+        .nav-right {
+            font-size: 1.1rem;
+            // pour ne pas passer passer par le media query, on encadre la width (min et max-width)
+            min-width: 100px;
+            width: 25%;
+            max-width: 300px;
+            // on ecarde les éléments
+            justify-content: space-around;
+            // on ajoute une marge pour garder le cote responsive
+            margin-right: 10px;
+
+            @media screen and (max-width:700px) {
+                display: none;
+            }
+
+            li {
+                transition: 0.15s;
+                cursor: pointer;
+
+                // on grossit legèrement les éléments au survol
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+        }
+    }
+}

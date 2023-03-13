@@ -1,0 +1,95 @@
+// Ici on range tous les paramètres globaux du projet 
+
+@font-face {
+    font-family: "inter-bold";
+    src: url(../fonts/Inter-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: "merri";
+    src: url(../fonts/Merriweather-Light.ttf);
+}
+
+$font1: inter-bold, sans-serif;
+$font2: merri, serif;
+$black1: rgb(17, 17, 17);
+$white1: rgb(243, 243, 243);
+$grey1: rgb(209, 209, 209);
+$grey2: rgb(233, 233, 233);
+$grey3: rgb(105, 105, 105);
+
+@mixin title {
+    font-family: $font1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// on paramètre la vitesse du scroll auto (fleche pour remonter vers le haut)- pour une harmonie plus douce
+
+html {
+    scroll-behavior: smooth;
+}
+
+li {
+    list-style: none;
+}
+
+a,
+a:visited {
+    color: $white1;
+}
+
+body {
+    background: url(../img/bg.jpg) fixed center/cover;
+    text-align: center;
+    font-family: $font2;
+    max-width: 1300px;
+    // on recentre les éléménts pour qu'il n'y ai plus de marge à droite (cause max-width)
+    margin: 0 auto;
+
+    // on crée effet écran noir qui s'eclaircit à l'arrivée sur le projet
+    // on parmètre l'état initial de l'écran noir
+    &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: $black1;
+
+        // on appelle l'animation créée dessous et on rajoute "forward" à la fin pour que le visuel reste en opacity 0 comme à la fin de l'anim
+        animation: animBefore 1.5s ease forwards;
+        // on ajoute un délai pour le déclenchement de l'animation
+        animation-delay: 0.15s;
+
+        // ********************************************************
+        // on créer l'animation
+        @keyframes animBefore {
+            to {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.btn {
+    background: none;
+    border: 2px solid $black1;
+    height: 45px;
+    width: 170px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    // on appelle notre minxin "title", pour appliquer les paramètres préenregistrés
+    @include title;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
